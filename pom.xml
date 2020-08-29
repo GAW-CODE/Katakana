@@ -11,7 +11,7 @@
     <groupId>com.gawcode</groupId>
     <artifactId>tameshite-miru</artifactId>
     <version>1.0.0-KALVIN-SNAPSHOT</version>
-    <name>Tameshite Miru</name>
+    <name>Katakana</name>
     <description>Tryout system</description>
 
     <properties>

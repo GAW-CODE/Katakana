@@ -12,7 +12,13 @@ public class ResponseConstant {
 
     public static final JsonObject SURVEY_MODIFIED = JsonBuilderFactory
             .buildObject()
-            .add("code", 404)
-            .add("message", "Survey not found")
+            .add("code", 200)
+            .add("message", "Survey modified")
+            .getJson();
+
+    public static final JsonObject SURVEY_CREATED = JsonBuilderFactory
+            .buildObject()
+            .add("code", 200)
+            .add("message", "Survey created")
             .getJson();
 }

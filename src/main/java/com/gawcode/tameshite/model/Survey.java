@@ -1,24 +1,27 @@
 package com.gawcode.tameshite.model;
 
 import com.google.gson.JsonObject;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@AllArgsConstructor
+@Setter
+@Document("surveys")
 public class Survey {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    private final long id;
 
     @Setter
     private JsonObject content;
 
-    private List<Application> applications;
+    private final List<Application> applications;
 
     public void addApplication(Application application) {
         this.applications.add(application);
