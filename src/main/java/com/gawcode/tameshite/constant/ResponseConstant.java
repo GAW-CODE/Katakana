@@ -27,4 +27,10 @@ public class ResponseConstant {
             .add("code", 200)
             .add("message", "Application submitted")
             .getJson();
+
+    public static final JsonObject APPLICATION_NOT_FOUND = JsonBuilderFactory
+            .buildObject()
+            .add("code", 200)
+            .add("message", "Application not found")
+            .getJson();
 }

@@ -44,6 +44,15 @@ public class APIController {
         return ResponseEntity.ok(ResponseConstant.SURVEY_MODIFIED);
     }
 
+    @GetMapping("/application/{id}")
+    public ResponseEntity<JsonObject> getApplication(@Validated @PathVariable("id") long applicationId) {
+        Application application = this.applicationService.find(applicationId).orElse(null);
+
+        if (application == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResponseConstant.APPLICATION_NOT_FOUND);
+
+        return ResponseEntity.ok(application.getContent());
+    }
+
     @PostMapping("/action/survey/create")
     public ResponseEntity<JsonObject> createSurvey(@RequestParam("name") @Validated String name, @Validated @RequestBody JsonObject surveyContent) {
         long surveyId = Snowflake.INSTANCE.nextId();
@@ -82,4 +91,5 @@ public class APIController {
 
         return ResponseEntity.ok(ResponseConstant.APPLICATION_SUBMITTED);
     }
+
 }

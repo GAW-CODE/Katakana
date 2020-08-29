@@ -1,21 +1,16 @@
 package com.gawcode.tameshite.model.member;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.*;
 import java.util.Collection;
 
-@Entity
-@Table(name = "team_members")
+@Document("team-members")
 public class TeamMember {
     @Id
-    @Column(name = "team_member_id")
     private long id;
 
-    @ManyToMany
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"))
+    @DBRef
     private Collection<TeamMemberRole> roles;
 }

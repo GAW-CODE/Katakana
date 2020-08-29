@@ -1,11 +1,12 @@
 package com.gawcode.tameshite.model.member;
 
-import com.gawcode.tameshite.model.member.TeamMember;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.util.Collection;
 
-@Entity
+@Document("team-member-roles")
 public class TeamMemberRole {
     @Id
     private long id;
@@ -15,12 +16,6 @@ public class TeamMemberRole {
     @ManyToMany(mappedBy = "roles")
     private Collection<TeamMember> teamMembers;
 
-    @ManyToMany
-    @JoinTable(
-            name = "roles_privileges",
-            joinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "privilege_id", referencedColumnName = "id"))
+    @DBRef
     private Collection<TeamMemberRolePrivilege> privileges;
 }

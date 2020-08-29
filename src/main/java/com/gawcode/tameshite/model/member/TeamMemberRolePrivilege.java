@@ -11,7 +11,4 @@ public class TeamMemberRolePrivilege {
     private long id;
 
     private String name;
-
-    @ManyToMany(mappedBy = "privileges")
-    private Collection<TeamMemberRole> roles;
 }
