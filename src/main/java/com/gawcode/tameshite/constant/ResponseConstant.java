@@ -21,4 +21,10 @@ public class ResponseConstant {
             .add("code", 200)
             .add("message", "Survey created")
             .getJson();
+
+    public static final JsonObject APPLICATION_SUBMITTED = JsonBuilderFactory
+            .buildObject()
+            .add("code", 200)
+            .add("message", "Application submitted")
+            .getJson();
 }

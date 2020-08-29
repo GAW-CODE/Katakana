@@ -1,6 +1,7 @@
 package com.gawcode.tameshite.controller;
 
 import com.gawcode.tameshite.constant.ResponseConstant;
+import com.gawcode.tameshite.model.Application;
 import com.gawcode.tameshite.model.Survey;
 import com.gawcode.tameshite.service.ApplicationService;
 import com.gawcode.tameshite.service.SurveyService;
@@ -55,9 +56,30 @@ public class APIController {
         }
 
         this.surveyService
-                .saveAsync(new Survey(surveyId, surveyContent, new ArrayList<>()))
+                .saveAsync(new Survey(surveyId, name, surveyContent))
                 .join();
 
         return ResponseEntity.ok(ResponseConstant.SURVEY_CREATED);
+    }
+
+    @PostMapping("/action/application/submit/{id}")
+    public ResponseEntity<JsonObject> submitApplication(@PathVariable("id") @Validated long surveyId, @Validated @RequestBody JsonObject applicationContent) {
+        long applicationId = Snowflake.INSTANCE.nextId();
+
+        Survey survey = this.surveyService.find(surveyId).orElse(null);
+
+        if (survey == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResponseConstant.SURVEY_NOT_FOUND);
+
+        Application application = this.applicationService.find(applicationId).orElse(null);
+        while (application != null) {
+            applicationId = Snowflake.INSTANCE.nextId();
+            application = this.applicationService.find(applicationId).orElse(null);
+        }
+
+        this.applicationService
+                .saveAsync(new Application(applicationId, applicationContent, survey))
+                .join();
+
+        return ResponseEntity.ok(ResponseConstant.APPLICATION_SUBMITTED);
     }
 }

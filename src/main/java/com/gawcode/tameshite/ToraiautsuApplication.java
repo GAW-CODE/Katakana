@@ -10,10 +10,10 @@ import java.util.concurrent.Executor;
 
 @SpringBootApplication
 @EnableAsync
-public class KatakanaApplication {
+public class ToraiautsuApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(KatakanaApplication.class, args);
+        SpringApplication.run(ToraiautsuApplication.class, args);
     }
 
     @Bean
