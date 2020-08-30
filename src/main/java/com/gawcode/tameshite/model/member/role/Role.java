@@ -2,6 +2,8 @@ package com.gawcode.tameshite.model.member.role;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.stream.Stream;
+
 @RequiredArgsConstructor
 public class Role implements Comparable<Role> {
     private final long identifier;
@@ -33,5 +35,9 @@ public class Role implements Comparable<Role> {
 
     public static Role fromId(long identifier) {
         return new Role(identifier);
+    }
+
+    public NamedRole toNamed() {
+        return Stream.of(NamedRole.values()).filter(namedRole -> namedRole.getRole().identifier == this.identifier).findFirst().orElse(null);
     }
 }
