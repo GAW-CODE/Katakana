@@ -1,16 +1,21 @@
 package com.gawcode.tameshite.model.member;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
+import com.gawcode.tameshite.model.member.role.NamedRole;
+import com.gawcode.tameshite.model.member.role.Role;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Document("team-members")
 public class TeamMember {
     @Id
     private long id;
 
-    @DBRef
-    private Collection<TeamMemberRole> roles;
+    private String email, password;
+
+    private Role role;
+
+    public boolean has(NamedRole namedRole) {
+        return this.role != null && this.role.has(namedRole.getRole());
+    }
 }

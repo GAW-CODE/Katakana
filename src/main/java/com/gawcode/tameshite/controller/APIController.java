@@ -9,14 +9,13 @@ import com.gawcode.tameshite.util.Snowflake;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-
 @RestController
-@RequestMapping("/api/")
+@RequestMapping(value = "/api/", produces = MediaType.APPLICATION_JSON_VALUE)
 @Validated
 public class APIController {
     @Autowired
@@ -25,7 +24,7 @@ public class APIController {
     @Autowired
     private ApplicationService applicationService;
 
-    @GetMapping("/survey/{id}")
+    @GetMapping(value = "/survey/{id}")
     public ResponseEntity<JsonObject> getSurvey(@Validated @PathVariable("id") long surveyId) {
         Survey survey = this.surveyService.find(surveyId).orElse(null);
 
